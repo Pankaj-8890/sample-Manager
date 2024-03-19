@@ -1,0 +1,32 @@
+syntax = "proto3";
+package proto;
+option go_package = "sampleManager/proto";
+
+message CreateRequest {
+  string sample_item_id = 1;
+  repeated string segments = 2;
+  string item_id = 3;
+}
+
+message CreateResponse {
+  string message = 1;
+}
+
+message GetRequest {
+  repeated string clm = 1;
+  string item_id = 2;
+}
+
+message GetResponse {
+  string sample_item_id = 1;
+}
+
+
+service SampleManager {
+    rpc CreateMapping (CreateRequest) returns (CreateResponse);
+    rpc GetSampleId (GetRequest) returns (GetResponse);
+    
+}
+
+
+// protoc -Iproto --go_out=.  --go_opt=module=sampleManager --go-grpc_out=. --go-grpc_opt=module=sampleManager proto/sampleManager.proto
