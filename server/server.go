@@ -36,10 +36,16 @@ func main() {
 }
 
 func (s *Server) GetSampleId(ctx context.Context, req *pb.GetRequest) (*pb.GetResponse, error) {
-	sample_item_id, err := middleware.GetSampleID(s.DB, req.Clm, req.ItemId)
+	var sample_item_id string
 
-	if err != nil {
-		errorString := fmt.Sprintf("No mapping found: %v", err)
+    result :=s.DB.Model(&model.Mapping{}).
+	Select("sample_item_id").
+	Joins("JOIN segments ON segments.mapping_id = mappings.id").
+	Where("mappings.item_id = ?", req.ItemId).
+	First(&sample_item_id)
+
+	if result.Error != nil {
+		errorString := fmt.Sprintf("No mapping found: %v", result.Error)
 		return nil, status.Error(codes.Unavailable, errorString)
 	}
 
