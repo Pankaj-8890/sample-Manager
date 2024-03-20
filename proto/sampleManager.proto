@@ -30,3 +30,4 @@ service SampleManager {
 
 
 // protoc -Iproto --go_out=.  --go_opt=module=sampleManager --go-grpc_out=. --go-grpc_opt=module=sampleManager proto/sampleManager.proto
+// mockgen -destination=mocks/mocks.go -source=proto/sampleManager_grpc.pb.go

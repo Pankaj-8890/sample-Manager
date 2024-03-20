@@ -13,7 +13,7 @@ import (
 func DatabaseConnection() *gorm.DB {
 	host := "localhost"
 	port := "5432"
-	dbName := "sampleManager"
+	dbName := "samplemanager"
 	dbUser := "postgres"
 	password := "postgres"
 	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable", host, port, dbUser, dbName, password)
