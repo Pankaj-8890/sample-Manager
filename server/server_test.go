@@ -97,7 +97,6 @@ func TestGetSampleId(t *testing.T) {
             tc.mockServerBehavior()
 
             resp, err := mockServer.GetSampleId(context.Background(), tc.req)
-g
             if tc.expectedError != nil {
                 assert.Equal(t, tc.expectedError, err)
             } else {
